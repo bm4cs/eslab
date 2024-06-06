@@ -1,0 +1,22 @@
+elasticsearch.hosts: ["https://node5:9204"]
+server.host: 0.0.0.0
+server.port: 5602
+server.publicBaseUrl: http://localhost:5602
+
+elasticsearch.username: "kibana_system"
+elasticsearch.ssl.certificateAuthorities: /usr/share/kibana/config/certificates/ca/ca.crt
+elasticsearch.ssl.verificationMode: none
+
+xpack.encryptedSavedObjects.encryptionKey: NdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZr4u7w!z%C*F
+
+xpack.actions.preconfigured:
+ my-email:
+   name: Demo emails
+   actionTypeId: .email
+   config:
+     from: alerts-noreply@elastic.co
+     host: email-smtp.eu-west-1.amazonaws.com
+     port: 465
+     secure: true
+   secrets:
+     user: AKIA4FO4LCPCDF3EAX76

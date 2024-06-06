@@ -1,0 +1,19 @@
+---
+services:
+  create_certs:
+    command: >
+      bash -c '
+        if [[ ! -f /certs/bundle.zip ]]; then
+          bin/elasticsearch-certutil ca --silent --pem -out /certs/ca.zip;
+          unzip /certs/ca.zip -d /certs;
+
+          bin/elasticsearch-certutil cert --silent --pem --in config/certificates/instances.yml -out /certs/bundle.zip --ca-cert /certs/ca/ca.crt --ca-key /certs/ca/ca.key;
+          unzip /certs/bundle.zip -d /certs; 
+        fi; chown -R 1000:0 /certs '
+    container_name: create_certs
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.3
+    user: "0"
+    volumes: ['certs:/certs', '.:/usr/share/elasticsearch/config/certificates']
+    working_dir: /usr/share/elasticsearch
+volumes:
+  certs: null

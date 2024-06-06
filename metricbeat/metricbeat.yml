@@ -1,0 +1,15 @@
+output.elasticsearch:
+  hosts: ["https://node5:9204"] ## Monitoring cluster
+  protocol: "https"
+  username: "training"
+  password: "nonprodpwd"
+  ssl.verification_mode: none
+
+metricbeat.modules:
+- module: elasticsearch
+  xpack.enabled: true
+  period: 10s
+  hosts: ["https://node1:9200", "https://node2:9200", "https://node3:9200"]
+  username: "training"
+  password: "nonprodpwd"
+  ssl.verification_mode: none

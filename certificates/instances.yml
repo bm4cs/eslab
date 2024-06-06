@@ -1,0 +1,36 @@
+instances:
+  - name: node1
+    dns:
+      - node1 
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: node2
+    dns:
+      - node2
+      - localhost
+    ip:
+      - 127.0.0.1
+  
+  - name: node3
+    dns:
+      - node3
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: node4
+    dns:
+      - node4
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: node5
+    dns:
+      - node5
+      - localhost
+    ip:
+      - 127.0.0.1
+
