@@ -111,7 +111,6 @@ services:
   node2:
     container_name: node2
     depends_on:
-      - create_certs
       - node1
     deploy:
       resources:
@@ -140,7 +139,6 @@ services:
   node3:
     container_name: node3
     depends_on:
-      - create_certs
       - node2
     deploy:
       resources:
@@ -169,7 +167,6 @@ services:
   node4:
     container_name: node4
     depends_on:
-      - create_certs
       - node2
     deploy:
       resources:
@@ -196,8 +193,6 @@ services:
       - ./elasticsearch/elasticsearch4.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   node5:
     container_name: node5
-    depends_on:
-      - create_certs
     deploy:
       resources:
         limits:
