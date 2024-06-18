@@ -20,6 +20,20 @@ instances:
     ip:
       - 127.0.0.1
 
+  - name: node4
+    dns:
+      - node4
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: node5
+    dns:
+      - node5
+      - localhost
+    ip:
+      - 127.0.0.1
+
   - name: rally1b
     dns:
       - rally1b
@@ -37,13 +51,6 @@ instances:
   - name: rally3
     dns:
       - rally3
-      - localhost
-    ip:
-      - 127.0.0.1
-
-  - name: node5
-    dns:
-      - node5
       - localhost
     ip:
       - 127.0.0.1

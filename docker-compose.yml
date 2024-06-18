@@ -54,25 +54,25 @@ services:
     volumes:
       - ./kibana/kibana2.yml:/usr/share/kibana/config/kibana.yml
       - certs:/usr/share/kibana/config/certificates
-  metricbeat:
-    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
-    container_name: metricbeat
-    depends_on:
-      node1:
-        condition: service_healthy
-      node2:
-        condition: service_healthy
-      node3:
-        condition: service_healthy
-    deploy:
-      mode: global
-    image: docker.elastic.co/beats/metricbeat:${STACK_VERSION}
-    networks:
-      - es-net
-    restart: always
-    user: root
-    volumes:
-      - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+  # metricbeat:
+  #   command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+  #   container_name: metricbeat
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #     node2:
+  #       condition: service_healthy
+  #     node3:
+  #       condition: service_healthy
+  #   deploy:
+  #     mode: global
+  #   image: docker.elastic.co/beats/metricbeat:${STACK_VERSION}
+  #   networks:
+  #     - es-net
+  #   restart: always
+  #   user: root
+  #   volumes:
+  #     - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
   node1:
     container_name: node1
     depends_on:
@@ -225,66 +225,66 @@ services:
       - certs:/usr/share/elasticsearch/config/certificates
       - ./data/node5:/usr/share/elasticsearch/data
       - ./elasticsearch/elasticsearch5.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-  rally1b:
-    command: ["race", "--track=pmc", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
-    container_name: rally1b
-    depends_on:
-      node1:
-        condition: service_healthy
-      node2:
-        condition: service_healthy
-      node3:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 4g
-    image: elastic/rally:latest
-    networks:
-      - es-net
-    volumes:
-      - certs:/usr/share/elasticsearch/config/certificates
-      - ./rally/rally.ini:/rally/.rally/rally.ini
-  rally2:
-    command: ["race", "--track=http_logs", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
-    container_name: rally2
-    depends_on:
-      node1:
-        condition: service_healthy
-      node2:
-        condition: service_healthy
-      node3:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 4g
-    image: elastic/rally:latest
-    networks:
-      - es-net
-    volumes:
-      - certs:/usr/share/elasticsearch/config/certificates
-      - ./rally/rally.ini:/rally/.rally/rally.ini
-  rally3:
-    command: ["race", "--track=metricbeat", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
-    container_name: rally3
-    depends_on:
-      node1:
-        condition: service_healthy
-      node2:
-        condition: service_healthy
-      node3:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 4g
-    image: elastic/rally:latest
-    networks:
-      - es-net
-    volumes:
-      - certs:/usr/share/elasticsearch/config/certificates
-      - ./rally/rally.ini:/rally/.rally/rally.ini
+  # rally1b:
+  #   command: ["race", "--track=pmc", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
+  #   container_name: rally1b
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #     node2:
+  #       condition: service_healthy
+  #     node3:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 4g
+  #   image: elastic/rally:latest
+  #   networks:
+  #     - es-net
+  #   volumes:
+  #     - certs:/usr/share/elasticsearch/config/certificates
+  #     - ./rally/rally.ini:/rally/.rally/rally.ini
+  # rally2:
+  #   command: ["race", "--track=http_logs", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
+  #   container_name: rally2
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #     node2:
+  #       condition: service_healthy
+  #     node3:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 4g
+  #   image: elastic/rally:latest
+  #   networks:
+  #     - es-net
+  #   volumes:
+  #     - certs:/usr/share/elasticsearch/config/certificates
+  #     - ./rally/rally.ini:/rally/.rally/rally.ini
+  # rally3:
+  #   command: ["race", "--track=metricbeat", "--pipeline=benchmark-only", "--target-hosts=https://node1:9200,https://node2:9200,https://node3:9200", "--client-options=basic_auth_user:'elastic',basic_auth_password:'nonprodpwd',use_ssl:true,verify_certs:false"]
+  #   container_name: rally3
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #     node2:
+  #       condition: service_healthy
+  #     node3:
+  #       condition: service_healthy
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 4g
+  #   image: elastic/rally:latest
+  #   networks:
+  #     - es-net
+  #   volumes:
+  #     - certs:/usr/share/elasticsearch/config/certificates
+  #     - ./rally/rally.ini:/rally/.rally/rally.ini
 volumes:
   certs: null
   snapshots: null
